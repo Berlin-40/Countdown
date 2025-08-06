@@ -1,6 +1,7 @@
 package com.countdown.presentation.countdown.countdownList
 
-interface CountdownListAction {
-    data class NavigateToCountdown(val countdownId: Int) : CountdownListAction
+sealed interface CountdownListAction {
+    data class NavigateToCountdownDetail(val countdownId: Int) : CountdownListAction
+    object NavigateToCountdownMinuteur : CountdownListAction
 
 }

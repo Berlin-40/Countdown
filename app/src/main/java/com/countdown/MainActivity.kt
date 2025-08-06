@@ -55,6 +55,7 @@ import com.countdown.presentation.component.topbar.TopBarCountdownListPreview
 import com.countdown.presentation.component.topbar.TopBarCountdownListWithActionPreview
 import com.countdown.presentation.countdown.countdownList.CountdownListUi
 import com.countdown.presentation.minuteur.MinuteurUi
+import com.countdown.presentation.navigation.NavApp
 import com.countdown.ui.theme.CountdownTheme
 import com.countdown.ui.theme.RedPrimary
 import com.countdown.ui.theme.RedSecondary
@@ -83,12 +84,7 @@ class MainActivity : ComponentActivity() {
 
                 ) { innerPadding ->
                     val navController = rememberNavController()
-                    CountdownListUi(navController = navController, modifier = Modifier.padding(innerPadding))
-
-//                    MinuteurUi(
-//                        navController = navController,
-//                        modifier = Modifier.padding(innerPadding)
-                    //)
+                    NavApp(modifier = Modifier.padding(innerPadding), navController = navController)
                 }
             }
         }
