@@ -1,6 +1,7 @@
 package com.countdown.presentation.component.cards
 
 import android.R.attr.description
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,12 +24,14 @@ import com.countdown.ui.theme.RedPrimary
 fun CardsCountdownItem(
     title: String,
     duration: String,
+    onItemClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable{onItemClick()},
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(
             containerColor = RedPrimary,

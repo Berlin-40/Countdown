@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.countdown.data.AppDatabase
 import com.countdown.data.dao.CountdownDao
+import com.countdown.data.repository.FakeRepositoryImpl
 import com.countdown.data.repository.RepositoryImpl
 import com.countdown.domain.repository.Repository
 import dagger.Module
@@ -37,6 +38,6 @@ object AppModuleProvider {
     @Singleton
     @Provides
     fun provideRepository(countdownDao: CountdownDao): Repository {
-        return RepositoryImpl(countdownDao)
+        return FakeRepositoryImpl()
     }
 }

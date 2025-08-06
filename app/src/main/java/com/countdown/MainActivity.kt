@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.countdown.presentation.countdown.countdownList.CountdownListUi
 import com.countdown.ui.theme.CountdownTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +21,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CountdownTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()
 
-
+                ) { innerPadding ->
+                    val navController = rememberNavController()
+                    CountdownListUi(navController = navController, modifier = Modifier.padding(innerPadding))
                 }
             }
         }
