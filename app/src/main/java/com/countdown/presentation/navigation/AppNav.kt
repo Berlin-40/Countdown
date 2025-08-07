@@ -18,7 +18,7 @@ fun NavApp(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = AppRoutes.Countdown
+        startDestination = AppRoutes.CountdownRoutes
     ) {
 
         CountdownNav(navController = navController)

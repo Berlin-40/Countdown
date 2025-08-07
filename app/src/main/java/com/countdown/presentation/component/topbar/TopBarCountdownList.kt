@@ -1,5 +1,6 @@
 package com.countdown.presentation.component.topbar
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -40,7 +41,7 @@ fun TopBarCountdownList(
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = RedPrimary,
-        )
+        ),
     )
 }
 
@@ -48,7 +49,7 @@ fun TopBarCountdownList(
 @Composable
 fun TopBarCountdownListPreview(){
     TopBarCountdownList(
-        title = "Banner"
+        title = "Banner1"
     )
 }
 
@@ -56,7 +57,7 @@ fun TopBarCountdownListPreview(){
 @Composable
 fun TopBarCountdownListWithActionPreview(){
     TopBarCountdownList(
-        title = "Banner",
+        title = "Banner1",
         onAction = {
             IconButton(
                 onClick = { }

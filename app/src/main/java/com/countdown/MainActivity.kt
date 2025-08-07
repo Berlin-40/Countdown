@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,6 +42,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,6 +55,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
@@ -60,12 +63,14 @@ import com.countdown.presentation.component.animation.BubbleAnimation
 import com.countdown.presentation.component.bottombar.BottomBarNav
 import com.countdown.presentation.component.bottombar.BottombarPreview
 import com.countdown.presentation.component.bottombar.MyBottomBar
+import com.countdown.presentation.component.bottombar.MyBottomBarDelete
 import com.countdown.presentation.component.scrollList.CircularScrollList
 import com.countdown.presentation.component.topbar.TopBarCountdownList
 import com.countdown.presentation.component.topbar.TopBarCountdownListWithActionPreview
 import com.countdown.presentation.countdown.countdownList.CountdownListUi
 import com.countdown.presentation.countdown.navigation.CountdownRoutes
-import com.countdown.presentation.minuteur.MinuteurUi
+import com.countdown.presentation.countdown.selectionCountdown.SelectionAction
+import com.countdown.presentation.countdown.selectionCountdown.SelectionViewModel
 import com.countdown.presentation.navigation.AppRoutes
 import com.countdown.presentation.navigation.NavApp
 import com.countdown.ui.theme.Black
@@ -86,63 +91,19 @@ class MainActivity : ComponentActivity() {
             val destination = currentRoute?.destination?.route
             CountdownTheme {
                 Scaffold(
-                    topBar = {
-                        TopBarCountdownListWithActionPreview()
-                        when {
-                            destination?.contains(CountdownRoutes.List.toString()) == true ->{
-                                TopBarCountdownList("Countdown",onAction = {
-                                    IconButton(
-                                        onClick = {navController.navigate(CountdownRoutes.Add) }
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Add,
-                                            contentDescription = "Add",
-                                            tint = Black
-                                        )
-                                    }
-                                }
-                                )
-                            }
-                            destination?.contains(AppRoutes.Minuteur.toString()) == true -> TopBarCountdownList("Minuteur")
-                            destination?.contains(CountdownRoutes.Add.toString()) == true -> {
-                                TopBarCountdownList(
-                                    title = "Add",
-                                    onNavigation = {
-                                        IconButton(
-                                            onClick = { navController.popBackStack() }
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Default.KeyboardArrowLeft,
-                                                contentDescription = "Back",
-                                                tint = Black,
-                                                modifier = Modifier.size(24.dp)
-                                            )
-                                        }
-                                    }
-                                )
-                            }
-                            destination?.contains(CountdownRoutes.Update.toString()) == true -> {}
-                            destination?.contains(CountdownRoutes.Detail.toString()) == true -> {
-
-                            }
-                            else->{}
-                        }
-                    },
 
                     bottomBar = {
                         when {
                             destination?.contains(CountdownRoutes.List.toString()) == true -> MyBottomBar(navController,"List")
                             destination?.contains(AppRoutes.Minuteur.toString()) == true -> MyBottomBar(navController, "Minuteur")
-                            destination?.contains(CountdownRoutes.Add.toString()) == true -> {}
-                            destination?.contains(CountdownRoutes.Update.toString()) == true -> {}
-                            destination?.contains(CountdownRoutes.Detail.toString()) == true -> {}
                             else->{}
                         }
                                 },
                     modifier = Modifier
                         .fillMaxSize()
                     ,
-                    containerColor = RedSecondary
+                    containerColor = RedSecondary,
+                    contentWindowInsets = WindowInsets(0)
 
                 ) { innerPadding ->
                     NavApp(modifier = Modifier.padding(innerPadding), navController = navController)

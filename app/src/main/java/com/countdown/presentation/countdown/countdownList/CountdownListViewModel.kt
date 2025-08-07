@@ -22,7 +22,26 @@ class CountdownListViewModel
     private val _state = mutableStateOf(CountdownListState())
     val state = _state
 
-    fun onItemClick(itemId: Int) {
+    fun onAction(action: CountdownListAction){
+        when(action){
+            is CountdownListAction.NavigateToCountdownMinuteur ->{
+                viewModelScope.launch {
+                    _eventFlow.emit(CountdownListAction.NavigateToCountdownMinuteur)
+                }
+            }
+
+            is CountdownListAction.GotoSelection -> {
+                viewModelScope.launch {
+                    _eventFlow.emit(CountdownListAction.GotoSelection)
+                }
+            }
+            is CountdownListAction.NavigateToCountdownDetail -> {
+                onItemClick(action.countdownId)
+            }
+        }
+    }
+
+    private fun onItemClick(itemId: Int) {
         viewModelScope.launch {
             _eventFlow.emit(CountdownListAction.NavigateToCountdownDetail(itemId))
         }

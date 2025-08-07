@@ -53,6 +53,7 @@ fun CardMinuteur(
         ),
         modifier = modifier
             .fillMaxWidth()
+            .padding(16.dp)
             .height(t)
 
     ) {

@@ -31,12 +31,12 @@ fun CardsCountdownItemSelection(
     toggleSelection: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
-    val isSelectedItem  = isSelected()
+    val isSelectedItem  = isSelected
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable{toggleSelection(id)},
+            .clickable{toggleSelection()},
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(
             containerColor = if(!isSelectedItem) RedPrimary else RedDark,
@@ -48,7 +48,7 @@ fun CardsCountdownItemSelection(
         ){
             Checkbox(
                 checked = isSelectedItem,
-                onCheckedChange = { toggleSelection(id) }
+                onCheckedChange = { toggleSelection() }
             )
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = title,
@@ -70,5 +70,5 @@ fun CardsCountdownItemSelection(
 @Preview(showBackground = true)
 fun CardsCountdownItemSelectionPreview(){
 
-    CardsCountdownItemSelection(1,"Birthday","10 days", isSelected = {false})
+    CardsCountdownItemSelection(1,"Birthday","10 days", isSelected = false)
 }

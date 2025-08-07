@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.countdown.presentation.component.box.BoxMinuteur
 import com.countdown.presentation.component.cards.CardMinuteur
+import com.countdown.presentation.component.topbar.TopBarCountdownList
 import com.countdown.presentation.component.topbar.TopBarCountdownListPreview
 import com.countdown.ui.theme.Black
 import com.countdown.ui.theme.White
@@ -57,12 +58,11 @@ fun MinuteurUi(
     }
     Column(
         modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ){
 
+        TopBarCountdownList("Minuteur",)
 
         CardMinuteur(
             started = minuteurState.launched,
