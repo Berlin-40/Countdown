@@ -5,9 +5,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface CountdownRoutes {
     @Serializable
-    object List: CountdownRoutes
+    data object List: CountdownRoutes
     @Serializable
-    object Add: CountdownRoutes
+    data class Selection(val itemSelected: Int): CountdownRoutes
+    @Serializable
+    data object Add: CountdownRoutes
     @Serializable
     data class Update(val id: Int): CountdownRoutes
     @Serializable

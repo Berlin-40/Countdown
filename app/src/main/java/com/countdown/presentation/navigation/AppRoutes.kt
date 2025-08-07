@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface AppRoutes {
     @Serializable
-    object Countdown: AppRoutes
+    data  object CountdownRoutes: AppRoutes
 
     @Serializable
-    object Minuteur: AppRoutes
+    data  object Minuteur: AppRoutes
 }

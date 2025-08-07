@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.countdown.presentation.component.cards.CardsCountdownItem
+import com.countdown.presentation.navigation.AppRoutes
 
 @Composable
 fun CountdownListUi(
@@ -22,8 +23,8 @@ fun CountdownListUi(
     LaunchedEffect(true) {
         viewModel.eventFlow.collect { event ->
             when (event) {
-                is CountdownListAction.NavigateToCountdown -> {
-                    navController.navigate("detail/${event}")
+                is CountdownListAction.NavigateToCountdownMinuteur -> {
+                    navController.navigate(AppRoutes.Minuteur)
                 }
                 else ->{}
             }

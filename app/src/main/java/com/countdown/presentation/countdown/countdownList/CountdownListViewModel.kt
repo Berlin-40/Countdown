@@ -24,7 +24,7 @@ class CountdownListViewModel
 
     fun onItemClick(itemId: Int) {
         viewModelScope.launch {
-            _eventFlow.emit(CountdownListAction.NavigateToCountdown(itemId))
+            _eventFlow.emit(CountdownListAction.NavigateToCountdownDetail(itemId))
         }
     }
 

@@ -18,12 +18,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,6 +49,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.countdown.R
+import com.countdown.presentation.minuteur.MinuteurAction
+import com.countdown.ui.theme.Black
 import com.countdown.ui.theme.RedPrimary
 import com.countdown.ui.theme.RedSecondary
 import com.countdown.ui.theme.Rose
@@ -51,23 +58,23 @@ import com.countdown.ui.theme.White
 
 @Composable
 fun MarmiteAnimation(
-    start: Boolean = false,
+    start: Boolean,
+    onAction: (MinuteurAction) -> Unit = {},
     duration:Int,
     modifier: Modifier = Modifier
 ){
-    var animate by remember { mutableStateOf(true) }
 
     val t by animateFloatAsState(
-        targetValue = if (animate) 1f else 0f,
+        targetValue = if (start) 0f else 1f,
         animationSpec = tween(1000),
         label = "t animation"
     )
     val backgroundColor by animateColorAsState(
-        targetValue = if (animate) Rose else RedPrimary,
+        targetValue = if (start) RedPrimary else Rose,
         animationSpec = tween(durationMillis = 1000),
         label = "color transition"
     )
-    val state = if(animate) "Start" else "Stop"
+    val state = if(start) "Start" else "Stop"
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -88,8 +95,7 @@ fun MarmiteAnimation(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(32.dp)
-                .clickable { animate = !animate },
+                .padding(32.dp),
             contentAlignment = Alignment.Center
         ) {
             Image(
@@ -99,7 +105,7 @@ fun MarmiteAnimation(
                     .size(80.dp)
                     .offset(y = -120.dp)
                     .graphicsLayer { this.alpha =
-                        if(!animate) infiniteAlpha else 0f
+                        if(start) infiniteAlpha else 0f
                     },
                 )
             // Images animées par-dessus ou dessous
@@ -112,7 +118,6 @@ fun MarmiteAnimation(
                     .clip(RoundedCornerShape(30.dp)) ,
                 tint = backgroundColor
             )
-            //val bas = if(duration<=20 && !animate) R.drawable.marmite else R.drawable.bas
             Image(
                 painter = painterResource(id = R.drawable.bas),
                 contentDescription = "Marmite bas",
@@ -130,19 +135,19 @@ fun MarmiteAnimation(
                 color = Color.Black,
                 modifier = Modifier
                     .clip(RoundedCornerShape(50.dp))
-                    .clickable { animate = !animate },
+                    .clickable {
+                        if (start) {
+                            onAction(MinuteurAction.Stop)
+                        } else {
+                            onAction(MinuteurAction.Start)
+                        }
 
+                    }
                 )
-            if(duration<20 && !animate){
+            if(duration < 30 && start){
                 BubbleAnimation()
             }
-
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MarmiteAnimationPreview() {
-    MarmiteAnimation(duration = 1)
-}

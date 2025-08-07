@@ -3,6 +3,7 @@ package com.countdown.presentation.component.bottombar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,30 +19,36 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.countdown.ui.theme.Black
+import com.countdown.ui.theme.RedSecondary
 
 @Composable
-fun BottomBarCountdown(
+fun BottomBarNav(
     destinations: List<String> = emptyList(),
-    onNavigateToDestination: (String) -> Unit = {},
+    onNavigateToDestination: (String) -> Unit,
     currentRoute: String = "",
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
+    
+    BottomAppBar(
+        containerColor = RedSecondary
     ){
-        destinations.forEach { destination ->
-            TextButton(
-                onClick = { onNavigateToDestination(destination) },
-            ) {
-                Text(
-                    text = destination,
-                    style = if(destination == currentRoute)TextStyle(textDecoration = TextDecoration.Underline) else TextStyle(),
-                    color = Black,
-                    fontSize = 20.sp,
-                    fontWeight = if(destination == currentRoute) FontWeight.Bold else FontWeight.Normal
-                )
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            destinations.forEach { destination ->
+                TextButton(
+                    onClick = { onNavigateToDestination(destination) },
+                ) {
+                    Text(
+                        text = destination,
+                        style = if(destination == currentRoute)TextStyle(textDecoration = TextDecoration.Underline) else TextStyle(),
+                        color = Black,
+                        fontSize = 20.sp,
+                        fontWeight = if(destination == currentRoute) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
             }
         }
     }
@@ -56,7 +63,7 @@ fun BottombarPreview(){
     fun onNavigateToDestination(destination: String) {
         currentRoute =  destination
     }
-    BottomBarCountdown(
+    BottomBarNav(
         destinations = destinations,
         onNavigateToDestination = { onNavigateToDestination(it) },
         currentRoute = currentRoute
