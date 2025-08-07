@@ -2,7 +2,9 @@ package com.countdown.presentation.component.bottombar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.BottomAppBar
@@ -26,7 +28,8 @@ fun MyBottomBarDelete(
     onAction: () -> Unit
 ){
     BottomAppBar(
-        containerColor = RedSecondary
+        containerColor = RedSecondary,
+        windowInsets = WindowInsets.navigationBars
     ){
         Row(
             modifier = modifier.fillMaxWidth(),

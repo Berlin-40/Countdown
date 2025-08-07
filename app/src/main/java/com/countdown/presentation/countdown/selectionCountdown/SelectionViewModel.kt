@@ -21,7 +21,7 @@ class SelectionViewModel@Inject constructor(
     val repository: Repository
 ) : ViewModel() {
 
-    private val _eventFlow = MutableSharedFlow<CountdownListAction>()
+    private val _eventFlow = MutableSharedFlow<SelectionAction>()
     val eventFlow = _eventFlow.asSharedFlow()
 
     private val _state = MutableStateFlow(SelectionState())
@@ -32,16 +32,28 @@ class SelectionViewModel@Inject constructor(
             is SelectionAction.isSelect ->{
                 performSelected(action.id)
             }
-            is SelectionAction.delete ->{
-                viewModelScope.launch {
-                    performDelete()
-                    _eventFlow.emit(CountdownListAction.GotoSelection)
-                }
+            is SelectionAction.Delete ->{
+                performDelete()
             }
+            is SelectionAction.AllSelected ->{
+                performAllSelected()
+            }
+
         }
     }
     init {
         loadCountdown()
+    }
+
+    private fun performAllSelected(){
+        _state.update { current ->
+            val updatedList = if (current.listOfSelected.isEmpty()) {
+                current.listOfCountdowns.map { it.id }
+            } else {
+                emptyList()
+                }
+            current.copy(listOfSelected = updatedList)
+        }
     }
     private fun performSelected(id: Int){
         _state.update { current ->
@@ -54,6 +66,9 @@ class SelectionViewModel@Inject constructor(
         }
     }
     private fun performDelete(){
+        _state.update { current ->
+            current.copy(isLoading = true)
+        }
        viewModelScope.launch {
            _state.value.listOfSelected.forEach {id ->
                val countdown = _state.value.listOfCountdowns.find { it.id == id }
@@ -61,7 +76,7 @@ class SelectionViewModel@Inject constructor(
                    repository.deleteCountdown(countdown)
                }
            }
-           _eventFlow.emit(SelectionAction.delete)
+           _eventFlow.emit(SelectionAction.Delete)
 
        }
         _state.update { current ->
@@ -71,10 +86,13 @@ class SelectionViewModel@Inject constructor(
     }
 
     private fun loadCountdown() {
+        _state.update { current ->
+            current.copy(isLoading = true)
+        }
         viewModelScope.launch {
             _state.value = _state.value.copy(
                 listOfCountdowns = repository.getAllCountdowns(),
-                isLoading = true)
+                isLoading = false)
         }
     }
 

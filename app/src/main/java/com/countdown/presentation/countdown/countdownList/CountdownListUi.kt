@@ -38,7 +38,8 @@ fun CountdownListUi(
                     navController.navigate(CountdownRoutes.Detail(event.countdownId))
                 }
                 is CountdownListAction.GotoSelection -> {
-                    navController.navigate(CountdownRoutes.Selection(0))
+                    val countdownId = event.id
+                    navController.navigate(CountdownRoutes.Selection(countdownId))
                 }
 
                 else ->{}
@@ -67,7 +68,7 @@ fun CountdownListUi(
                 title = it.name,
                 duration = it.date.toString(),
                 onItemClick = {viewModel.onAction(CountdownListAction.NavigateToCountdownDetail(it.id))},
-                onLongClick = {viewModel.onAction(CountdownListAction.GotoSelection)}
+                onLongClick = {viewModel.onAction(CountdownListAction.GotoSelection(it.id))}
             )
         }
     }

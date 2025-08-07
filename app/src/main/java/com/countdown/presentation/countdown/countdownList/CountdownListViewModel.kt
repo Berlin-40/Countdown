@@ -32,7 +32,7 @@ class CountdownListViewModel
 
             is CountdownListAction.GotoSelection -> {
                 viewModelScope.launch {
-                    _eventFlow.emit(CountdownListAction.GotoSelection)
+                    _eventFlow.emit(CountdownListAction.GotoSelection(action.id))
                 }
             }
             is CountdownListAction.NavigateToCountdownDetail -> {

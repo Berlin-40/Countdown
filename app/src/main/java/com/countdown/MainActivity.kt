@@ -96,7 +96,6 @@ class MainActivity : ComponentActivity() {
                         when {
                             destination?.contains(CountdownRoutes.List.toString()) == true -> MyBottomBar(navController,"List")
                             destination?.contains(AppRoutes.Minuteur.toString()) == true -> MyBottomBar(navController, "Minuteur")
-                            else->{}
                         }
                                 },
                     modifier = Modifier

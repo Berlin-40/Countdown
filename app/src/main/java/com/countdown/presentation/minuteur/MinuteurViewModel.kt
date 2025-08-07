@@ -89,8 +89,8 @@ class MinuteurViewModel @Inject constructor() :ViewModel() {
     fun decrementSeconds() {
         _minuteurState.update { currentState ->
             when {
-                currentState.seconde > 0 -> currentState.copy(seconde = currentState.seconde - 1,infoMessage = "${currentState.seconde - 1} secondes restantes")
-                currentState.minute > 0 && currentState.seconde == 0 -> currentState.copy(minute = currentState.minute - 1, seconde = 59,infoMessage = "${currentState.minute - 1} minutes restantes")
+                currentState.seconde > 0 -> currentState.copy(seconde = currentState.seconde - 1,)
+                currentState.minute > 0 && currentState.seconde == 0 -> currentState.copy(minute = currentState.minute - 1, seconde = 59)
                 else -> currentState
             }
         }
