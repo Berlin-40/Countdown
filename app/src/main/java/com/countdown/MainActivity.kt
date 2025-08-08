@@ -105,7 +105,6 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                     ,
                     containerColor = RedSecondary,
-                    contentWindowInsets = WindowInsets(0)
 
                 ) { innerPadding ->
                     NavApp(modifier = Modifier.padding(innerPadding), navController = navController)
