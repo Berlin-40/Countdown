@@ -36,9 +36,11 @@ fun MyBottomBar(
 
             when(it){
                 "Countdown" -> {
+                    navController.popBackStack()
                     navController.navigate(AppRoutes.CountdownRoutes)
                 }
                 "Minuteur" -> {
+                    navController.popBackStack()
                     navController.navigate(AppRoutes.Minuteur)
                 }
 

@@ -78,4 +78,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
+    //SpashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+
 }
