@@ -2,6 +2,7 @@ package com.countdown.presentation.component.cards
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +56,13 @@ fun CardMinuteur(
             .fillMaxWidth()
             .padding(16.dp)
             .height(t)
+            .clickable {
+                if (started) {
+                    onAction(MinuteurAction.Stop)
+                } else {
+                    onAction(MinuteurAction.Start)
+                }
+            }
 
     ) {
         Row(

@@ -79,7 +79,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     //SpashScreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
 
 }

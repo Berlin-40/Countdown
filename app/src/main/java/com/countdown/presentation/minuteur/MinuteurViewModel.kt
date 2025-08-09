@@ -31,7 +31,7 @@ class MinuteurViewModel @Inject constructor() :ViewModel() {
                     }
                 } else {
                     _minuteurState.update {
-                        it.copy(launched = true, started = true, errorMessage = null)
+                        it.copy(launched = true, started = true, infoMessage = "Minuteur démarré.")
                     }
                 }
             }

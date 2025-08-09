@@ -80,7 +80,6 @@ import com.countdown.ui.theme.RedPrimary
 import com.countdown.ui.theme.RedSecondary
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,6 +91,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentRoute = navController.currentBackStackEntryAsState().value
             val destination = currentRoute?.destination?.route
+
             CountdownTheme {
                 Scaffold(
 
@@ -105,6 +105,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                     ,
                     containerColor = RedSecondary,
+                    contentWindowInsets = WindowInsets(0)
 
                 ) { innerPadding ->
                     NavApp(modifier = Modifier.padding(innerPadding), navController = navController)

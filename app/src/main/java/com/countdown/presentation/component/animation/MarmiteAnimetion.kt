@@ -74,7 +74,7 @@ fun MarmiteAnimation(
         animationSpec = tween(durationMillis = 1000),
         label = "color transition"
     )
-    val state = if(start) "Start" else "Stop"
+    val state = if(!start) "Start" else "Stop"
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,

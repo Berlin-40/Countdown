@@ -40,9 +40,8 @@ fun TopBarCountdownList(
         },
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Black,
-        ),
-        windowInsets = WindowInsets(0)
+            containerColor = RedPrimary,
+        )
     )
 }
 

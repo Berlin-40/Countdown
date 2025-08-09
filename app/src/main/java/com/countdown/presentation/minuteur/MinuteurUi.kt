@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Refresh
@@ -25,6 +27,7 @@ import androidx.navigation.NavController
 import com.countdown.presentation.component.animation.MarmiteAnimation
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.countdown.presentation.component.box.BoxMinuteur
@@ -56,9 +59,15 @@ fun MinuteurUi(
             viewModel.clearMessages()
         }
     }
+    val configuration = LocalConfiguration.current
+    val orientation = (configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE)
+
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .then(if (orientation) Modifier.verticalScroll(scrollState) else Modifier),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
 
