@@ -10,6 +10,8 @@ Inclut notifications programmables, thèmes, export/import et affichage plein é
 
 ---
 
+![image](https://github.com/Berlin-40/Countdown/blob/0acf0f20c74eb6721b539880c779186f63c4fc1c/minuteur.png)
+
 ## Fonctionnalités
 
 - **Création de compte‑à‑rebours** : titre, date/heure, description, image optionnelle.  
